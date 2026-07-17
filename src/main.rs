@@ -1,18 +1,19 @@
 use core::error;
+use std::fmt::Minus;
 use std::mem::transmute_copy;
 use std::io;
 use std::io::Write;
 
 fn main() {
     struct Libros{
-        autor:String,
         titulo:String,
+        autor:String,
         disponible:bool,
     }
 
     impl Libros{
         pub fn constructor(titulo:String, autor:String)->Libros{
-            Libros { autor, titulo, disponible: true }
+            Libros { titulo, autor, disponible: true }
         }
         pub fn esta_disponible(&self) -> bool {
         self.disponible
@@ -61,11 +62,11 @@ fn main() {
     }
     struct Revistas{
         titulo:String,
-        edicion:u32,
+        edicion:String,
         disponible:bool,
 }
     impl Revistas{
-        pub fn constructor(titulo:String, edicion:u32)->Revistas{
+        pub fn constructor(titulo:String, edicion:String)->Revistas{
             Revistas { titulo, edicion, disponible: true }
         }
     }
@@ -102,7 +103,7 @@ fn main() {
             Estanterias { nombre, coleccion:Vec::new() }
         }
 
-        pub fn agregar_coleccion(&self, item: Box<dyn Prestable>){
+        pub fn agregar_coleccion(&mut self, item: Box<dyn Prestable>){
            self.coleccion.push(item);
         }
         pub fn listar(&self){
@@ -112,7 +113,7 @@ fn main() {
         println!("|                            |");
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!();
-        for listas in self.coleccion{
+        for listas in &self.coleccion{
             let estado= if listas.esta_disponible() {" Disponible "} else {" No Disponible "};
                 println!("1.{} => {}", self.nombre, estado);
         }
@@ -138,8 +139,20 @@ fn main() {
 
 
 let mut coleccion: Vec<Box<dyn Prestable>> = Vec::new();
+let mut coleccion_libros:Vec<Libros>=Vec::new();
+let mut coleccion_revistas:Vec<Revistas>=Vec::new();
 let mut documento:u32;
 let mut documentos:String;
+let mut obj_libros:String;
+let mut titulazo:String;
+let mut autorazo:String;
+let mut edicionazo:String;
+let mut contador:u32=1;
+let obj_libros:Libros;
+let obj_revistas:Revistas;
+
+
+
 loop{
     println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
     println!("|                            |");
@@ -180,7 +193,8 @@ loop{
     println!("|      3. Documentos Registrados      |");
     println!("|        4. Buscar Documentos         |");
     println!("|       5. Eliminar Documentos        |");
-    println!("|              6. Salir               |");
+    println!("|         6. Ver Estanterías          |");
+    println!("|              7. Salir               |");
     println!("|                                     |");
     println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
     println!();
@@ -200,23 +214,96 @@ loop{
     println!();
     match opcion{
         1=>{
+            if opcion==1{
+                print!("Por favor, ingrese el título del libro: {contador}: ");
+                let mut titulo:String=String::new();
+                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
+                titulazo=titulo.trim().to_string();
+                println!();
 
+                print!("Por favor, ingrese el título del libro: {contador}: ");
+                let mut autor:String=String::new();
+                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                io::stdin().read_line(&mut autor).expect("Error en la lectura de la línea");
+                autorazo=autor.trim().to_string();
+                println!();
+                contador+=1;
+
+                obj_libros=Libros::constructor(titulazo, autorazo);
+                coleccion_libros.push(obj_libros);
+                coleccion.push(Box::new(obj_libros));
+                print!("Libro guardado correctamente.");
+                println!();
+
+            }
+            else if opcion==2{
+                print!("Por favor, ingrese el título de la revista: {contador}: ");
+                let mut titulo:String=String::new();
+                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
+                titulazo=titulo.trim().to_string();
+                println!();
+
+                print!("Por favor, ingrese la edición de la revista: {contador}: ");
+                let mut edicion:String=String::new();
+                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                io::stdin().read_line(&mut edicion).expect("Error en la lectura de la línea");
+                edicionazo=edicion.trim().to_string();
+                println!();
+                contador+=1;
+
+                obj_revistas=Revistas::constructor(titulo, edicion);
+                
+                coleccion_revistas.push(obj_revistas);
+                coleccion.push(Box::new(obj_revistas));
+                print!("Revista guardada correctamente.");
+                println!();
+            }
         },
         2=>{
+            if opcion==1{
+                
+            }
+            else if opcion==2{
 
+            }
         },
         3=>{
+            if opcion==1{
 
+            }
+            else if opcion==2{
+                
+            }
         },
         4=>{
+            if opcion==1{
 
+            }
+            else if opcion==2{
+                
+            }
         },
         5=>{
+            if opcion==1{
 
+            }
+            else if opcion==2{
+                
+            }
         },
         6=>{
-            println!("Saliendo del programa..."); break;
+            if coleccion.len()>0{
+
+            }
+            else{
+                println!("No hay ningún libro en la colección.\nPor favor, ingresa por lo menos un tipo de documento.");
+            }
         },
+        7=>{
+             println!("Saliendo del programa..."); break;
+        }
         _=>{
             println!("Opción inválida, por favor ingrese una opción que este en el menú\nPor favor, vuelve a intentarlo: ");
         }
