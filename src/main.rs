@@ -31,7 +31,7 @@ fn main() {
     }
     trait Prestable {
         fn titulo(&self) -> String;
-        fn estadisponible(&self) -> bool;
+        fn esta_disponible(&self) -> bool;
         fn prestar (&mut self) -> bool;
         fn devolver(&mut self);
         
@@ -40,7 +40,7 @@ fn main() {
         fn titulo (&self)->String{
             self.titulo.clone()
         }
-        fn estadisponible(&self) -> bool {
+        fn esta_disponible(&self) -> bool {
             self.disponible
         }
         fn prestar (&mut self) -> bool {
@@ -65,7 +65,7 @@ fn main() {
         fn titulo(&self) -> String {
         format!("{} - edición {}", self.titulo, self.edicion)
         }
-        fn estadisponible(&self) -> bool {
+        fn esta_disponible(&self) -> bool {
         self.disponible
         }
         fn prestar(&mut self) -> bool {
@@ -81,6 +81,10 @@ fn main() {
             self.disponible = true;
         }
     }
+    fn mostrar_estado(item: &dyn Prestable) {
+    let estado = if item.esta_disponible() { "disponible" } else { "prestado" };
+    println!("{} está {}", item.titulo(), estado);
+}
 }
     
 
