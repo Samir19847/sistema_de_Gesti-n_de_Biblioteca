@@ -91,43 +91,93 @@ fn main() {
 
 let mut libros:Vec<Libros>=Vec::new();
 let mut revistas:Vec<Revistas>=Vec::new();
-let documento:u32;
+let mut documento:u32;
 let mut documentos:String;
 loop{
-    println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
     println!("|                            |");
     println!("|         GESTIÓN DE         |");
     println!("|         BIBLIOTECA         |");
     println!("|                            |");
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
     println!();
-   println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
     println!("|                            |");
     println!("|         1. Libros.         |");
     println!("|         2. Revistas        |");
     println!("|                            |");
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
     println!();
     print!("Por favor, ingrese el tipo de documento con el que desea operar: ");
     documentos=String::new();
     io::stdout().flush().expect("Error en el forzamiento del buffer.");
     io::stdin().read_line(&mut documentos).expect("Error en la lectura de la linea");
-    match documentos.trim().parse(){
-        Ok(valido)=>{
-            documento=valido
-        }
+    documento=match documentos.trim().parse(){
+        Ok(valido)=> valido,
         Err(_)=>{
-            print!();
+            println!();
             println!("Por favor, ingrese un número entero positivo.");
             println!();
             continue;
         }
-    }
+    };
 }
+let mut opcion:u32;
+loop{
 
 
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("|                                     |");
+    println!("|       1. Agregar Documentos         |");
+    println!("|   2. Modificamiento de Documentos   |");
+    println!("|      3. Documentos Registrados      |");
+    println!("|        4. Buscar Documentos         |");
+    println!("|       5. Eliminar Documentos        |");
+    println!("|              6. Salir               |");
+    println!("|                                     |");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!();
+    print!("Por favor, ingrese una opción: ");
+    let mut menu:String=String::new();
+    io::stdout().flush().expect("Error en el forzamiento del buffer.");
+    io::stdin().read_line(&mut menu).expect("Error en la lectura de la linea");
+    opcion =match menu.trim().parse(){
+        Ok(valido)=> valido,
+        Err(_)=>{
+            println!();
+            println!("Por favor, ingrese un número entero positivo.");
+            println!();
+            continue;
+        }
+    };
+    println!();
+    match opcion{
+        1=>{
+
+        },
+        2=>{
+
+        },
+        3=>{
+
+        },
+        4=>{
+
+        },
+        5=>{
+
+        },
+        6=>{
+            println!("Saliendo del programa..."); break;
+        },
+        _=>{
+            println!("Opción inválida, por favor ingrese una opción que este en el menú\nPor favor, vuelve a intentarlo: ");
+        }
+
+    }
 
 
+}
 
 }
     
