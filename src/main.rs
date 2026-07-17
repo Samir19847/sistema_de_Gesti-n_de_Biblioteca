@@ -1,4 +1,7 @@
+use core::error;
 use std::mem::transmute_copy;
+use std::io;
+use std::io::Write;
 
 fn main() {
     struct Libros{
@@ -85,6 +88,47 @@ fn main() {
     let estado = if item.esta_disponible() { "disponible" } else { "prestado" };
     println!("{} está {}", item.titulo(), estado);
 }
+
+let mut libros:Vec<Libros>=Vec::new();
+let mut revistas:Vec<Revistas>=Vec::new();
+let documento:u32;
+let mut documentos:String;
+loop{
+    println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("|                            |");
+    println!("|         GESTIÓN DE         |");
+    println!("|         BIBLIOTECA         |");
+    println!("|                            |");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+    println!();
+   println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!("|                            |");
+    println!("|         1. Libros.         |");
+    println!("|         2. Revistas        |");
+    println!("|                            |");
+    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    println!();
+    print!("Por favor, ingrese el tipo de documento con el que desea operar: ");
+    documentos=String::new();
+    io::stdout().flush().expect("Error en el forzamiento del buffer.");
+    io::stdin().read_line(&mut documentos).expect("Error en la lectura de la linea");
+    match documentos.trim().parse(){
+        Ok(valido)=>{
+            documento=valido
+        }
+        Err(_)=>{
+            print!();
+            println!("Por favor, ingrese un número entero positivo.");
+            println!();
+            continue;
+        }
+    }
+}
+
+
+
+
+
 }
     
 
