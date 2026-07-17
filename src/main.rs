@@ -64,6 +64,11 @@ fn main() {
         edicion:u32,
         disponible:bool,
 }
+    impl Revistas{
+        pub fn constructor(titulo:String, edicion:u32)->Revistas{
+            Revistas { titulo, edicion, disponible: true }
+        }
+    }
     impl Prestable for Revistas{
         fn titulo(&self) -> String {
         format!("{} - edición {}", self.titulo, self.edicion)
@@ -88,9 +93,51 @@ fn main() {
     let estado = if item.esta_disponible() { "disponible" } else { "prestado" };
     println!("{} está {}", item.titulo(), estado);
 }
+    struct Estanterias{
+        nombre:String,
+        coleccion:Vec<Box<dyn Prestable>>
+    }
+    impl Estanterias{
+        pub fn constructor(nombre:String)->Estanterias{
+            Estanterias { nombre, coleccion:Vec::new() }
+        }
 
-let mut libros:Vec<Libros>=Vec::new();
-let mut revistas:Vec<Revistas>=Vec::new();
+        pub fn agregar_coleccion(&self, item: Box<dyn Prestable>){
+           self.coleccion.push(item);
+        }
+        pub fn listar(&self){
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!("|                            |");
+        println!("|    Estantería de   {}      |", self.nombre);
+        println!("|                            |");
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!();
+        for listas in self.coleccion{
+            let estado= if listas.esta_disponible() {" Disponible "} else {" No Disponible "};
+                println!("1.{} => {}", self.nombre, estado);
+        }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let mut coleccion: Vec<Box<dyn Prestable>> = Vec::new();
 let mut documento:u32;
 let mut documentos:String;
 loop{
