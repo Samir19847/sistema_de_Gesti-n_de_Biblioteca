@@ -54,16 +54,35 @@ fn main() {
         fn devolver(&mut self) {
             self.disponible=true;
         }
-
-
-
-
-
-
-
-
-
+        
+    }
+    struct Revistas{
+        titulo:String,
+        edicion:u32,
+        disponible:bool,
+}
+    impl Prestable for Revistas{
+        fn titulo(&self) -> String {
+        format!("{} - edición {}", self.titulo, self.edicion)
+        }
+        fn estadisponible(&self) -> bool {
+        self.disponible
+        }
+        fn prestar(&mut self) -> bool {
+            if self.disponible {
+                self.disponible = false;
+                true
+            } 
+            else {
+            false
+            }
+        }
+        fn devolver(&mut self) {
+            self.disponible = true;
         }
     }
+}
+    
+
 
 
