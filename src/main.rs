@@ -1,11 +1,10 @@
-use core::error;
-use std::fmt::Minus;
-use std::mem::transmute_copy;
+
 use std::io;
 use std::io::Write;
 
 fn main() {
-    struct Libros{
+    #[derive(Clone)]
+    struct Libros {
         titulo:String,
         autor:String,
         disponible:bool,
@@ -30,7 +29,6 @@ fn main() {
         pub fn devolver(&mut self){
             self.disponible=true;
         }
-
     
     }
     trait Prestable {
@@ -60,6 +58,7 @@ fn main() {
         }
         
     }
+     #[derive(Clone)]
     struct Revistas{
         titulo:String,
         edicion:String,
@@ -141,15 +140,14 @@ fn main() {
 let mut coleccion: Vec<Box<dyn Prestable>> = Vec::new();
 let mut coleccion_libros:Vec<Libros>=Vec::new();
 let mut coleccion_revistas:Vec<Revistas>=Vec::new();
-let mut documento:u32;
+let documento:u32;
 let mut documentos:String;
 let mut obj_libros:String;
 let mut titulazo:String;
 let mut autorazo:String;
 let mut edicionazo:String;
 let mut contador:u32=1;
-let obj_libros:Libros;
-let obj_revistas:Revistas;
+
 
 
 
@@ -172,13 +170,15 @@ loop{
     documentos=String::new();
     io::stdout().flush().expect("Error en el forzamiento del buffer.");
     io::stdin().read_line(&mut documentos).expect("Error en la lectura de la linea");
-    documento=match documentos.trim().parse(){
-        Ok(valido)=> valido,
+    match documentos.trim().parse(){
+        Ok(valido)=> {
+            documento=valido;
+            break;
+        }
         Err(_)=>{
             println!();
             println!("Por favor, ingrese un número entero positivo.");
             println!();
-            continue;
         }
     };
 }
@@ -222,7 +222,7 @@ loop{
                 titulazo=titulo.trim().to_string();
                 println!();
 
-                print!("Por favor, ingrese el título del libro: {contador}: ");
+                print!("Por favor, ingrese el autor del libro: {contador}: ");
                 let mut autor:String=String::new();
                 io::stdout().flush().expect("Error en el forzamiento del bufer. ");
                 io::stdin().read_line(&mut autor).expect("Error en la lectura de la línea");
@@ -230,8 +230,8 @@ loop{
                 println!();
                 contador+=1;
 
-                obj_libros=Libros::constructor(titulazo, autorazo);
-                coleccion_libros.push(obj_libros);
+                let mut obj_libros=Libros::constructor(titulazo, autorazo);
+                coleccion_libros.push(obj_libros.clone());
                 coleccion.push(Box::new(obj_libros));
                 print!("Libro guardado correctamente.");
                 println!();
@@ -253,9 +253,9 @@ loop{
                 println!();
                 contador+=1;
 
-                obj_revistas=Revistas::constructor(titulo, edicion);
+                let mut obj_revistas=Revistas::constructor(titulo, edicion);
                 
-                coleccion_revistas.push(obj_revistas);
+                coleccion_revistas.push(obj_revistas.clone());
                 coleccion.push(Box::new(obj_revistas));
                 print!("Revista guardada correctamente.");
                 println!();
@@ -282,7 +282,24 @@ loop{
         3=>{
             if opcion==1{
                 if coleccion_libros.len()>0{
-
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!("|                            |");
+                        println!("|         GESTIÓN DE         |");
+                        println!("|         BIBLIOTECA         |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!();
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!("|                            |");
+                        println!("|         Documentos         |");
+                        println!("|         Registrados        |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!();
+                        for item in &coleccion_libros{
+                            println!("Título: {}, Autor: {}, Estado: {}.", item.titulo, item.autor, item.disponible);
+                            println!();
+                        }
                 }
                 else{
                     println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
