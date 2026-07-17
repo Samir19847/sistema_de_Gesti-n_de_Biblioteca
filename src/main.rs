@@ -263,34 +263,74 @@ loop{
         },
         2=>{
             if opcion==1{
-                
+                if coleccion_libros.len()>0{
+
+                }
+                else{
+                    println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+                }
             }
             else if opcion==2{
+                if coleccion_revistas.len()>0{
 
+                }
+                else{
+                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                }
             }
         },
         3=>{
             if opcion==1{
+                if coleccion_libros.len()>0{
 
+                }
+                else{
+                    println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+                }
             }
             else if opcion==2{
-                
+                if coleccion_revistas.len()>0{
+
+                }
+                else{
+                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                }
             }
         },
         4=>{
             if opcion==1{
+            if coleccion_libros.len()>0{
 
             }
+            else{
+                println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+            }
+            }
             else if opcion==2{
-                
+                if coleccion_revistas.len()>0{
+
+                }
+                else{
+                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                }
             }
         },
         5=>{
             if opcion==1{
+            if coleccion_libros.len()>0{
 
             }
+            else{
+                println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+            }
+            }
             else if opcion==2{
-                
+                if coleccion_revistas.len()>0{
+
+                }
+                else{
+                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                }
             }
         },
         6=>{
