@@ -1,7 +1,6 @@
 
 use std::io;
 use std::io::Write;
-
 fn main() {
     #[derive(Clone)]
     struct Libros {
@@ -214,7 +213,7 @@ loop{
     println!();
     match opcion{
         1=>{
-            if opcion==1{
+            if documento==1{
                 print!("Por favor, ingrese el título del libro: {contador}: ");
                 let mut titulo:String=String::new();
                 io::stdout().flush().expect("Error en el forzamiento del bufer. ");
@@ -237,7 +236,7 @@ loop{
                 println!();
 
             }
-            else if opcion==2{
+            else if documento==2{
                 print!("Por favor, ingrese el título de la revista: {contador}: ");
                 let mut titulo:String=String::new();
                 io::stdout().flush().expect("Error en el forzamiento del bufer. ");
@@ -262,7 +261,7 @@ loop{
             }
         },
         2=>{
-            if opcion==1{
+            if documento==1{
                 if coleccion_libros.len()>0{
 
                 }
@@ -270,7 +269,7 @@ loop{
                     println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
             }
-            else if opcion==2{
+            else if documento==2{
                 if coleccion_revistas.len()>0{
 
                 }
@@ -280,8 +279,9 @@ loop{
             }
         },
         3=>{
-            if opcion==1{
+            if documento==1{
                 if coleccion_libros.len()>0{
+                    
                         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
                         println!("|                            |");
                         println!("|         GESTIÓN DE         |");
@@ -297,15 +297,17 @@ loop{
                         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
                         println!();
                         for item in &coleccion_libros{
-                            println!("Título: {}, Autor: {}, Estado: {}.", item.titulo, item.autor, item.disponible);
+                            let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
+                            println!("Título: {}, Autor: {}, Estado: {}.", item.titulo, item.autor, estado);
                             println!();
                         }
+                        io::stdout().flush().expect("Error en el forzamiento del bufer");
                 }
                 else{
                     println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
             }
-            else if opcion==2{
+            else if documento==2{
                 if coleccion_revistas.len()>0{
 
                 }
@@ -315,7 +317,7 @@ loop{
             }
         },
         4=>{
-            if opcion==1{
+            if documento==1{
             if coleccion_libros.len()>0{
 
             }
@@ -323,7 +325,7 @@ loop{
                 println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
             }
             }
-            else if opcion==2{
+            else if documento==2{
                 if coleccion_revistas.len()>0{
 
                 }
@@ -333,7 +335,7 @@ loop{
             }
         },
         5=>{
-            if opcion==1{
+            if documento==1{
             if coleccion_libros.len()>0{
 
             }
@@ -341,7 +343,7 @@ loop{
                 println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
             }
             }
-            else if opcion==2{
+            else if documento==2{
                 if coleccion_revistas.len()>0{
 
                 }
