@@ -97,8 +97,8 @@ fn main() {
         coleccion:Vec<Box<dyn Prestable>>
     }
     impl Estanterias{
-        pub fn constructor(nombre:String)->Estanterias{
-            Estanterias { nombre, coleccion:Vec::new() }
+        pub fn constructor(nombre:String, coleccion:Vec<Box<dyn Prestable>>)->Estanterias{
+            Estanterias { nombre, coleccion}
         }
 
         pub fn agregar_coleccion(&mut self, item: Box<dyn Prestable>){
@@ -107,13 +107,13 @@ fn main() {
         pub fn listar(&self){
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!("|                            |");
-        println!("|    Estantería de   {}      |", self.nombre);
+        println!("|    Estantería de la {}      |", self.nombre);
         println!("|                            |");
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!();
         for listas in &self.coleccion{
             let estado= if listas.esta_disponible() {" Disponible "} else {" No Disponible "};
-                println!("1.{} => {}", self.nombre, estado);
+                println!("1.{} => {}", listas.titulo(), estado);
         }
         }
     }
@@ -133,10 +133,9 @@ fn main() {
 
 
 
-
-
-
+let nombree:String=format!("Biblioteca");
 let mut coleccion: Vec<Box<dyn Prestable>> = Vec::new();
+let mut estanteria:Estanterias=Estanterias::constructor(nombree, coleccion);
 let mut coleccion_libros:Vec<Libros>=Vec::new();
 let mut coleccion_revistas:Vec<Revistas>=Vec::new();
 let documento:u32;
@@ -229,9 +228,11 @@ loop{
                 println!();
                 contador+=1;
 
-                let mut obj_libros=Libros::constructor(titulazo, autorazo);
+                let obj_libros=Libros::constructor(titulazo, autorazo);
                 coleccion_libros.push(obj_libros.clone());
-                coleccion.push(Box::new(obj_libros));
+                estanteria.agregar_coleccion(Box::new(obj_libros));
+
+
                 print!("Libro guardado correctamente.");
                 println!();
 
@@ -252,10 +253,10 @@ loop{
                 println!();
                 contador+=1;
 
-                let mut obj_revistas=Revistas::constructor(titulo, edicion);
+                let obj_revistas=Revistas::constructor(titulo, edicion);
                 
                 coleccion_revistas.push(obj_revistas.clone());
-                coleccion.push(Box::new(obj_revistas));
+                estanteria.agregar_coleccion(Box::new(obj_revistas));
                 print!("Revista guardada correctamente.");
                 println!();
             }
@@ -282,26 +283,28 @@ loop{
             if documento==1{
                 if coleccion_libros.len()>0{
                     
-                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        println!("|                            |");
-                        println!("|         GESTIÓN DE         |");
-                        println!("|         BIBLIOTECA         |");
-                        println!("|                            |");
-                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    println!("|                            |");
+                    println!("|         GESTIÓN DE         |");
+                    println!("|         BIBLIOTECA         |");
+                    println!("|                            |");
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    println!();
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                    println!("|                            |");
+                    println!("|         Documentos         |");
+                    println!("|         Registrados        |");
+                    println!("|                            |");
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                    println!();
+                    for item in &coleccion_libros{
+                        let mut contador=1;
+                        let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
+                        println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.autor, estado);
                         println!();
-                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                        println!("|                            |");
-                        println!("|         Documentos         |");
-                        println!("|         Registrados        |");
-                        println!("|                            |");
-                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                        println!();
-                        for item in &coleccion_libros{
-                            let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
-                            println!("Título: {}, Autor: {}, Estado: {}.", item.titulo, item.autor, estado);
-                            println!();
-                        }
-                        io::stdout().flush().expect("Error en el forzamiento del bufer");
+                        contador+=1;
+                    }
+                        
                 }
                 else{
                     println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
@@ -309,7 +312,27 @@ loop{
             }
             else if documento==2{
                 if coleccion_revistas.len()>0{
-
+                     println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    println!("|                            |");
+                    println!("|         GESTIÓN DE         |");
+                    println!("|         BIBLIOTECA         |");
+                    println!("|                            |");
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    println!();
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                    println!("|                            |");
+                    println!("|         Documentos         |");
+                    println!("|         Registrados        |");
+                    println!("|                            |");
+                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                    println!();
+                    for item in &coleccion_revistas{
+                        let mut contador=1;
+                        let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
+                        println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.edicion, estado);
+                        println!();
+                        contador+=1;
+                    }
                 }
                 else{
                     println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
@@ -353,8 +376,8 @@ loop{
             }
         },
         6=>{
-            if coleccion.len()>0{
-
+            if estanteria.coleccion.len()>0{
+                estanteria.listar();
             }
             else{
                 println!("No hay ningún libro en la colección.\nPor favor, ingresa por lo menos un tipo de documento.");
