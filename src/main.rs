@@ -148,7 +148,6 @@ let mut contador:u32=1;
 let mut opcion:u32;
 
 
-
 loop{
     documento=loop{
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
@@ -161,7 +160,8 @@ loop{
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
         println!("|                            |");
         println!("|         1. Libros.         |");
-        println!("|         2. Revistas        |");
+        println!("|         2. Revistas.       |");
+        println!("| 9. Salir del a aplicación. |");
         println!("|                            |");
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
         println!();
@@ -180,7 +180,10 @@ loop{
         }
     
     };
-    
+    if documento==9{
+        println!("Saliendo del programa...");
+        break;
+    }
     loop{
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!("|                                     |");
@@ -279,7 +282,7 @@ loop{
                                     println!();
                                 }
                             }
-                            match coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado) {
+                            match estanteria.coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado) {
                                 Some(indice) => {
                                     println!("Su posición entre la lista general de la biblioteca es de {} unidades", indice)
                                 }
@@ -306,7 +309,7 @@ loop{
                         println!();
                         if coleccion_revistas.iter().any(|libro| libro.titulo==titulo_buscado1)
                         {
-                            println!("¡La revista {} sí existe en la colección!", titulo_buscado);
+                            println!("¡La revista {} sí existe en la colección!", titulo_buscado1);
                             match coleccion_libros.iter().position(|posicion| posicion.titulo==titulo_buscado1) {
                                 Some(indice) => {
                                     println!("Su posición entre la lista de libros es la de {} unidades", indice)
@@ -315,7 +318,7 @@ loop{
                                     println!();
                                 }
                             }
-                            match coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado1) {
+                            match estanteria.coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado1) {
                                 Some(indice) => {
                                     println!("Su posición entre la lista general de la biblioteca es de {} unidades", indice)
                                 }
@@ -325,7 +328,7 @@ loop{
                             }
                             }
                             else {
-                            println!("El libro {} no se encuentra en la colección.", titulo_buscado)
+                            println!("El libro {} no se encuentra en la colección.", titulo_buscado1)
                         }
                         }
                     }
