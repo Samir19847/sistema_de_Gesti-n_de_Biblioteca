@@ -1,6 +1,7 @@
 
 use std::io;
 use std::io::Write;
+use std::str::CharIndices;
 fn main() {
     #[derive(Clone)]
     struct Libros {
@@ -399,6 +400,38 @@ loop{
             },
             4=>{
                 if documento==1{
+                    print!("Por favor, ingrese el título del libro que desea buscar: ");
+                    let mut modificado1:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                    io::stdin().read_line(&mut modificado1).expect("Error en la lectura de la línea");
+                    let titulo_modificado1=modificado1.trim();
+                    println!();
+                    if coleccion_libros.iter().any(|libros| libros.titulo==modificado1) {
+                            println!("¡El libro {} fue entonctrado!", modificado1);
+                            if let Some(indice)=coleccion_libros.iter().position(|libros| libros.titulo==modificado1) {
+                                if let Some(libro)=coleccion_libros.get_mut(indice){
+                                    print!("Por favor, ingrese el nuevo título del libro: {}", modificado1);
+                                    let mut nuevo1:String=String::new();
+                                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                                    io::stdin().read_line(&mut nuevo1).expect("Error en la lectura de la línea");
+                                    let titulo_nuebo1=nuevo1.trim().to_string();
+                                    libro.titulo=titulo_nuebo1;
+                                    println!();
+                                    print!("Por favor, ingrese el autor del libro: {}", nuevo1);
+                                    let mut nuevo2:String=String::new();
+                                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                                    io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
+                                    let autor_nuebo1=nuevo2.trim().to_string();
+                                    libro.autor=autor_nuebo1;
+                                }
+                            }
+                            println!();
+                            println!("Cambios realziados");
+                                
+                    }
+                    else{
+                        println!("El libro no fue encontrado...");
+                    }
                 }
                 else if documento==2{
                     
