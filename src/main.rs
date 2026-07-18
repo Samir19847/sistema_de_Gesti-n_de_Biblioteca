@@ -106,9 +106,9 @@ fn main() {
         }
         pub fn listar(&self){
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-        println!("|                            |");
-        println!("|    Estantería de la {}      |", self.nombre);
-        println!("|                            |");
+        println!("|                                    |");
+        println!("|    Colección de la {}      |", self.nombre);
+        println!("|                                    |");
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!();
         for listas in &self.coleccion{
@@ -138,265 +138,260 @@ let mut coleccion: Vec<Box<dyn Prestable>> = Vec::new();
 let mut estanteria:Estanterias=Estanterias::constructor(nombree, coleccion);
 let mut coleccion_libros:Vec<Libros>=Vec::new();
 let mut coleccion_revistas:Vec<Revistas>=Vec::new();
-let documento:u32;
+let mut documento:u32;
 let mut documentos:String;
 let mut obj_libros:String;
 let mut titulazo:String;
 let mut autorazo:String;
 let mut edicionazo:String;
 let mut contador:u32=1;
-
-
-
-
-loop{
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-    println!("|                            |");
-    println!("|         GESTIÓN DE         |");
-    println!("|         BIBLIOTECA         |");
-    println!("|                            |");
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-    println!();
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-    println!("|                            |");
-    println!("|         1. Libros.         |");
-    println!("|         2. Revistas        |");
-    println!("|                            |");
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-    println!();
-    print!("Por favor, ingrese el tipo de documento con el que desea operar: ");
-    documentos=String::new();
-    io::stdout().flush().expect("Error en el forzamiento del buffer.");
-    io::stdin().read_line(&mut documentos).expect("Error en la lectura de la linea");
-    match documentos.trim().parse(){
-        Ok(valido)=> {
-            documento=valido;
-            break;
-        }
-        Err(_)=>{
-            println!();
-            println!("Por favor, ingrese un número entero positivo.");
-            println!();
-        }
-    };
-}
 let mut opcion:u32;
+
+
+
 loop{
-
-
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-    println!("|                                     |");
-    println!("|       1. Agregar Documentos         |");
-    println!("|   2. Modificamiento de Documentos   |");
-    println!("|      3. Documentos Registrados      |");
-    println!("|        4. Buscar Documentos         |");
-    println!("|       5. Eliminar Documentos        |");
-    println!("|         6. Ver Estanterías          |");
-    println!("|              7. Salir               |");
-    println!("|                                     |");
-    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-    println!();
-    print!("Por favor, ingrese una opción: ");
-    let mut menu:String=String::new();
-    io::stdout().flush().expect("Error en el forzamiento del buffer.");
-    io::stdin().read_line(&mut menu).expect("Error en la lectura de la linea");
-    opcion =match menu.trim().parse(){
-        Ok(valido)=> valido,
-        Err(_)=>{
-            println!();
-            println!("Por favor, ingrese un número entero positivo.");
-            println!();
-            continue;
+    documento=loop{
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!("|                            |");
+        println!("|         GESTIÓN DE         |");
+        println!("|         BIBLIOTECA         |");
+        println!("|                            |");
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!();
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+        println!("|                            |");
+        println!("|         1. Libros.         |");
+        println!("|         2. Revistas        |");
+        println!("|                            |");
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+        println!();
+        print!("Por favor, ingrese el tipo de documento con el que desea operar: ");
+        documentos=String::new();
+        io::stdout().flush().expect("Error en el forzamiento del buffer.");
+        io::stdin().read_line(&mut documentos).expect("Error en la lectura de la linea");
+        match documentos.trim().parse(){
+            Ok(valido)=> break valido,
+            Err(_)=>{
+                println!();
+                println!("Por favor, ingrese un número entero positivo.");
+                println!();
+                continue;
+            }
         }
+    
     };
-    println!();
-    match opcion{
-        1=>{
-            if documento==1{
-                print!("Por favor, ingrese el título del libro: {contador}: ");
-                let mut titulo:String=String::new();
-                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
-                io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
-                titulazo=titulo.trim().to_string();
+    
+    loop{
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!("|                                     |");
+        println!("|       1. Agregar Documentos         |");
+        println!("|   2. Modificamiento de Documentos   |");
+        println!("|      3. Documentos Registrados      |");
+        println!("|        4. Buscar Documentos         |");
+        println!("|       5. Eliminar Documentos        |");
+        println!("|         6. Ver Estanterías          |");
+        println!("|    7. Salir del tipo de documento   |");
+        println!("|                                     |");
+        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+        println!();
+        print!("Por favor, ingrese una opción: ");
+        let mut menu:String=String::new();
+        io::stdout().flush().expect("Error en el forzamiento del buffer.");
+        io::stdin().read_line(&mut menu).expect("Error en la lectura de la linea");
+        opcion =match menu.trim().parse(){
+            Ok(valido)=> valido,
+            Err(_)=>{
                 println!();
-
-                print!("Por favor, ingrese el autor del libro: {contador}: ");
-                let mut autor:String=String::new();
-                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
-                io::stdin().read_line(&mut autor).expect("Error en la lectura de la línea");
-                autorazo=autor.trim().to_string();
+                println!("Por favor, ingrese un número entero positivo.");
                 println!();
-                contador+=1;
-
-                let obj_libros=Libros::constructor(titulazo, autorazo);
-                coleccion_libros.push(obj_libros.clone());
-                estanteria.agregar_coleccion(Box::new(obj_libros));
-
-
-                print!("Libro guardado correctamente.");
-                println!();
-
+                continue;
             }
-            else if documento==2{
-                print!("Por favor, ingrese el título de la revista: {contador}: ");
-                let mut titulo:String=String::new();
-                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
-                io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
-                titulazo=titulo.trim().to_string();
-                println!();
+        };
+        println!();
+        match opcion{
+            1=>{
+                if documento==1{
+                    print!("Por favor, ingrese el título del libro: {contador}: ");
+                    let mut titulo:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                    io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
+                    titulazo=titulo.trim().to_string();
+                    println!();
 
-                print!("Por favor, ingrese la edición de la revista: {contador}: ");
-                let mut edicion:String=String::new();
-                io::stdout().flush().expect("Error en el forzamiento del bufer. ");
-                io::stdin().read_line(&mut edicion).expect("Error en la lectura de la línea");
-                edicionazo=edicion.trim().to_string();
-                println!();
-                contador+=1;
+                    print!("Por favor, ingrese el autor del libro: {contador}: ");
+                    let mut autor:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                    io::stdin().read_line(&mut autor).expect("Error en la lectura de la línea");
+                    autorazo=autor.trim().to_string();
+                    println!();
+                    contador+=1;
 
-                let obj_revistas=Revistas::constructor(titulo, edicion);
-                
-                coleccion_revistas.push(obj_revistas.clone());
-                estanteria.agregar_coleccion(Box::new(obj_revistas));
-                print!("Revista guardada correctamente.");
-                println!();
-            }
-        },
-        2=>{
-            if documento==1{
-                if coleccion_libros.len()>0{
+                    let obj_libros=Libros::constructor(titulazo, autorazo);
+                    coleccion_libros.push(obj_libros.clone());
+                    estanteria.agregar_coleccion(Box::new(obj_libros));
+
+
+                    print!("Libro guardado correctamente.");
+                    println!();
 
                 }
-                else{
-                    println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
-                }
-            }
-            else if documento==2{
-                if coleccion_revistas.len()>0{
+                else if documento==2{
+                    print!("Por favor, ingrese el título de la revista: {contador}: ");
+                    let mut titulo:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                    io::stdin().read_line(&mut titulo).expect("Error en la lectura de la línea");
+                    titulazo=titulo.trim().to_string();
+                    println!();
 
-                }
-                else{
-                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
-                }
-            }
-        },
-        3=>{
-            if documento==1{
-                if coleccion_libros.len()>0{
+                    print!("Por favor, ingrese la edición de la revista: {contador}: ");
+                    let mut edicion:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                    io::stdin().read_line(&mut edicion).expect("Error en la lectura de la línea");
+                    edicionazo=edicion.trim().to_string();
+                    println!();
+                    contador+=1;
+
+                    let obj_revistas=Revistas::constructor(titulo, edicion);
                     
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                    println!("|                            |");
-                    println!("|         GESTIÓN DE         |");
-                    println!("|         BIBLIOTECA         |");
-                    println!("|                            |");
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    coleccion_revistas.push(obj_revistas.clone());
+                    estanteria.agregar_coleccion(Box::new(obj_revistas));
+                    print!("Revista guardada correctamente.");
                     println!();
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                    println!("|                            |");
-                    println!("|         Documentos         |");
-                    println!("|         Registrados        |");
-                    println!("|                            |");
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                    println!();
-                    for item in &coleccion_libros{
-                        let mut contador=1;
-                        let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
-                        println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.autor, estado);
-                        println!();
-                        contador+=1;
+                }
+            },
+            2=>{
+                if documento==1{
+                    if coleccion_libros.len()>0{
+
                     }
+                    else{
+                        println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+                    }
+                }
+                else if documento==2{
+                    if coleccion_revistas.len()>0{
+
+                    }
+                    else{
+                        println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                    }
+                }
+            },
+            3=>{
+                if documento==1{
+                    if coleccion_libros.len()>0{
                         
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!("|                            |");
+                        println!("|         GESTIÓN DE         |");
+                        println!("|         BIBLIOTECA         |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!();
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!("|                            |");
+                        println!("|         Documentos         |");
+                        println!("|         Registrados        |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!();
+                        for item in &coleccion_libros{
+                            let mut contador=1;
+                            let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
+                            println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.autor, estado);
+                            println!();
+                            contador+=1;
+                        }
+                            
+                    }
+                    else{
+                        println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
+                    }
+                }
+                else if documento==2{
+                    if coleccion_revistas.len()>0{
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!("|                            |");
+                        println!("|         GESTIÓN DE         |");
+                        println!("|         BIBLIOTECA         |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                        println!();
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!("|                            |");
+                        println!("|         Documentos         |");
+                        println!("|         Registrados        |");
+                        println!("|                            |");
+                        println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+                        println!();
+                        for item in &coleccion_revistas{
+                            let mut contador=1;
+                            let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
+                            println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.edicion, estado);
+                            println!();
+                            contador+=1;
+                        }
+                    }
+                    else{
+                        println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                    }
+                }
+            },
+            4=>{
+                if documento==1{
+                if coleccion_libros.len()>0{
+
                 }
                 else{
                     println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
-            }
-            else if documento==2{
-                if coleccion_revistas.len()>0{
-                     println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                    println!("|                            |");
-                    println!("|         GESTIÓN DE         |");
-                    println!("|         BIBLIOTECA         |");
-                    println!("|                            |");
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                    println!();
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                    println!("|                            |");
-                    println!("|         Documentos         |");
-                    println!("|         Registrados        |");
-                    println!("|                            |");
-                    println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-                    println!();
-                    for item in &coleccion_revistas{
-                        let mut contador=1;
-                        let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
-                        println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.edicion, estado);
-                        println!();
-                        contador+=1;
+                }
+                else if documento==2{
+                    if coleccion_revistas.len()>0{
+
+                    }
+                    else{
+                        println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
                     }
                 }
-                else{
-                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
-                }
-            }
-        },
-        4=>{
-            if documento==1{
-            if coleccion_libros.len()>0{
-
-            }
-            else{
-                println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
-            }
-            }
-            else if documento==2{
-                if coleccion_revistas.len()>0{
+            },
+            5=>{
+                if documento==1{
+                if coleccion_libros.len()>0{
 
                 }
                 else{
-                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                    println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
-            }
-        },
-        5=>{
-            if documento==1{
-            if coleccion_libros.len()>0{
+                }
+                else if documento==2{
+                    if coleccion_revistas.len()>0{
 
-            }
-            else{
-                println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
-            }
-            }
-            else if documento==2{
-                if coleccion_revistas.len()>0{
-
+                    }
+                    else{
+                        println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                    }
+                }
+            },
+            6=>{
+                if estanteria.coleccion.len()>0{
+                    estanteria.listar();
                 }
                 else{
-                    println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
+                    println!("No hay ningún libro en la colección.\nPor favor, ingresa por lo menos un tipo de documento.");
                 }
+            },
+            7=>{
+                println!("Saliendo del tipo de documento...");
+                println!(); break;
             }
-        },
-        6=>{
-            if estanteria.coleccion.len()>0{
-                estanteria.listar();
+            _=>{
+                println!("Opción inválida, por favor ingrese una opción que este en el menú\nPor favor, vuelve a intentarlo: ");
             }
-            else{
-                println!("No hay ningún libro en la colección.\nPor favor, ingresa por lo menos un tipo de documento.");
-            }
-        },
-        7=>{
-             println!("Saliendo del programa..."); break;
+
         }
-        _=>{
-            println!("Opción inválida, por favor ingrese una opción que este en el menú\nPor favor, vuelve a intentarlo: ");
-        }
+
 
     }
-
-
+}    
 }
-
-}
-    
-
-
-
