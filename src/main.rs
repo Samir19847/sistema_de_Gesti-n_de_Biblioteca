@@ -400,24 +400,45 @@ loop{
             4=>{
                 if documento==1{
                 if coleccion_libros.len()>0{
-                    print!("Por favor, ingrese el título del que desea buscar: ");
+                    print!("Por favor, ingrese el título del libro que desea buscar: ");
                     let mut eliminado1:String=String::new();
                     io::stdout().flush().expect("Error en el forzamiento del bufer. ");
                     io::stdin().read_line(&mut eliminado1).expect("Error en la lectura de la línea");
                     let titulo_eliminado1=eliminado1.trim();
                     println!();
-                    if coleccion_libros.iter().any(|libro| libro.titulo==titulo_eliminado1)
-                    {
-                        
+                    if let Some(indice)=coleccion_libros.iter().position(|libros|libros.titulo==titulo_eliminado1){
+                        coleccion_libros.remove(indice); 
+                        println!("¡El libro ha sido eliminado con éxito!");
                     }
-                }
+                    else{
+                        println!("Libro no encontrado.");
+                    }
+                    if let Some(indice)=estanteria.coleccion.iter().position(|rasgo| rasgo.titulo()==titulo_eliminado1){
+                            estanteria.coleccion.remove(indice);
+                        }
+                    }
                 else{
                     println!("No se ha guardado ningún libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
                 }
                 else if documento==2{
                     if coleccion_revistas.len()>0{
-
+                        print!("Por favor, ingrese el título de la revista: ");
+                        let mut eliminado2:String=String::new();
+                        io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                        io::stdin().read_line(&mut eliminado2).expect("Error en la lectura de la línea.");
+                        let titulo_eliminado2=eliminado2;
+                        println!();
+                        if let Some(indice)=coleccion_revistas.iter().position(|revistas|revistas.titulo==titulo_eliminado2){
+                            coleccion_revistas.remove(indice);
+                            println!("¡La revista fue eliminada con éxito!");
+                        }
+                        else {
+                            println!("Revista no encontrada...");
+                        }
+                        if let Some(indice)=estanteria.coleccion.iter().position(|rasgo| rasgo.titulo()==titulo_eliminado2){
+                            estanteria.coleccion.remove(indice);
+                        }
                     }
                     else{
                         println!("No se ha guardado ninguna revista aún.\nPor favor, agregue una revista por lo menos.");
