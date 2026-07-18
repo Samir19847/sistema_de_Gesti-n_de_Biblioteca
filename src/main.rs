@@ -399,7 +399,15 @@ loop{
             },
             4=>{
                 if documento==1{
+                }
+                else if documento==2{
+                    
+                }
+            },
+            5=>{
+                if documento==1{
                 if coleccion_libros.len()>0{
+                    if coleccion_libros.len()>0{
                     print!("Por favor, ingrese el título del libro que desea buscar: ");
                     let mut eliminado1:String=String::new();
                     io::stdout().flush().expect("Error en el forzamiento del bufer. ");
@@ -416,13 +424,18 @@ loop{
                     if let Some(indice)=estanteria.coleccion.iter().position(|rasgo| rasgo.titulo()==titulo_eliminado1){
                             estanteria.coleccion.remove(indice);
                         }
-                    }
+                }
+                else{
+                    println!("No se ha guardado ningún libro aún.\nPor favor, agregue un libro por lo menos.");
+                }
+                }
                 else{
                     println!("No se ha guardado ningún libro aún.\nPor favor, agregue un libro por lo menos.");
                 }
                 }
                 else if documento==2{
                     if coleccion_revistas.len()>0{
+                        if coleccion_revistas.len()>0{
                         print!("Por favor, ingrese el título de la revista: ");
                         let mut eliminado2:String=String::new();
                         io::stdout().flush().expect("Error en el forzamiento del bufer.");
@@ -443,20 +456,6 @@ loop{
                     else{
                         println!("No se ha guardado ninguna revista aún.\nPor favor, agregue una revista por lo menos.");
                     }
-                }
-            },
-            5=>{
-                if documento==1{
-                if coleccion_libros.len()>0{
-
-                }
-                else{
-                    println!("No se ha guardado ningún libro aún.\nPor favor, agregue un libro por lo menos.");
-                }
-                }
-                else if documento==2{
-                    if coleccion_revistas.len()>0{
-
                     }
                     else{
                         println!("No se ha guardado ninguna revista aún.\nPor favor, agregue una revista por lo menos.");
