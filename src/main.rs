@@ -185,9 +185,9 @@ loop{
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!("|                                     |");
         println!("|       1. Agregar Documentos         |");
-        println!("|   2. Modificamiento de Documentos   |");
+        println!("|        2. Buscar Documentos         |");
         println!("|      3. Documentos Registrados      |");
-        println!("|        4. Buscar Documentos         |");
+        println!("|   4. Modificamiento de Documentos   |");
         println!("|       5. Eliminar Documentos        |");
         println!("|         6. Ver Estanterías          |");
         println!("|    7. Salir del tipo de documento   |");
@@ -262,20 +262,76 @@ loop{
             2=>{
                 if documento==1{
                     if coleccion_libros.len()>0{
-
-                    }
+                        print!("Por favor, ingrese el título del libro que desea buscar: ");
+                        let mut buscado:String=String::new();
+                        io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                        io::stdin().read_line(&mut buscado).expect("Error en la lectura de la línea");
+                        let titulo_buscado=buscado.trim();
+                        println!();
+                        if coleccion_libros.iter().any(|libro| libro.titulo==titulo_buscado)
+                        {
+                            println!("¡El libro {} sí existe en la colección!", titulo_buscado);
+                            match coleccion_libros.iter().position(|posicion| posicion.titulo==titulo_buscado) {
+                                Some(indice) => {
+                                    println!("Su posición entre la lista de libros es la de {} unidades", indice)
+                                }
+                                None =>{
+                                    println!();
+                                }
+                            }
+                            match coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado) {
+                                Some(indice) => {
+                                    println!("Su posición entre la lista general de la biblioteca es de {} unidades", indice)
+                                }
+                                None=>{
+                                    println!();
+                                }
+                            }
+                            }
+                            else {
+                            println!("El libro {} no se encuentra en la colección.", titulo_buscado)
+                        }
+                        }
                     else{
                         println!("No se ha guardado ningpun libro aún.\nPor favor, agregue un libro por lo menos.");
                     }
                 }
-                else if documento==2{
+                    else if documento==2{
                     if coleccion_revistas.len()>0{
-
+                        print!("Por favor, ingrese el título de la revista que desea buscar: ");
+                        let mut buscado1:String=String::new();
+                        io::stdout().flush().expect("Error en el forzamiento del bufer. ");
+                        io::stdin().read_line(&mut buscado1).expect("Error en la lectura de la línea");
+                        let titulo_buscado1=buscado1.trim();
+                        println!();
+                        if coleccion_revistas.iter().any(|libro| libro.titulo==titulo_buscado1)
+                        {
+                            println!("¡La revista {} sí existe en la colección!", titulo_buscado);
+                            match coleccion_libros.iter().position(|posicion| posicion.titulo==titulo_buscado1) {
+                                Some(indice) => {
+                                    println!("Su posición entre la lista de libros es la de {} unidades", indice)
+                                }
+                                None =>{
+                                    println!();
+                                }
+                            }
+                            match coleccion.iter().position(|posicion| posicion.titulo()==titulo_buscado1) {
+                                Some(indice) => {
+                                    println!("Su posición entre la lista general de la biblioteca es de {} unidades", indice)
+                                }
+                                None=>{
+                                    println!();
+                                }
+                            }
+                            }
+                            else {
+                            println!("El libro {} no se encuentra en la colección.", titulo_buscado)
+                        }
+                        }
                     }
                     else{
                         println!("No se ha guardado ningpuna revista aún.\nPor favor, agregue una revista por lo menos.");
                     }
-                }
             },
             3=>{
                 if documento==1{
