@@ -629,6 +629,9 @@ loop{
                                 }
                             }
                         }
+                        else {
+                            println!("El libro no se ha encontrado en ninguna lista.");
+                        }
 
                     }
                     else{
@@ -652,6 +655,9 @@ loop{
                                     println!("La revista ya estaba devolvida...");
                                 }
                             }
+                        }
+                        else {
+                            println!("La revista no se ha encontrado en ninguna lista.");
                         }
 
                     }
