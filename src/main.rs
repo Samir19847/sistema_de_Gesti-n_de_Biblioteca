@@ -426,7 +426,7 @@ loop{
                                 }
                             }
                             println!();
-                            println!("Cambios realziados");
+                            println!("Cambios realizados.");
                                 
                     }
                     else{
@@ -434,7 +434,38 @@ loop{
                     }
                 }
                 else if documento==2{
-                    
+                    print!("Por favor, ingrese el título de la revista que desea buscar: ");
+                    let mut modificado2:String=String::new();
+                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                    io::stdin().read_line(&mut modificado2).expect("Error en la lectura de la línea");
+                    let titulo_modificado2=modificado2.trim();
+                    println!();
+                    if coleccion_revistas.iter().any(|libros| libros.titulo==modificado2) {
+                            println!("!La revista {} fue entonctrado!", modificado2);
+                            if let Some(indice)=coleccion_revistas.iter().position(|libros| libros.titulo==modificado2) {
+                                if let Some(libro)=coleccion_revistas.get_mut(indice){
+                                    print!("Por favor, ingrese el nuevo título del libro: {}", modificado2);
+                                    let mut nuevo2:String=String::new();
+                                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                                    io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
+                                    let titulo_nuebo2=nuevo2.trim().to_string();
+                                    libro.titulo=titulo_nuebo2;
+                                    println!();
+                                    print!("Por favor, ingrese la edición de la revista: {}", nuevo1);
+                                    let mut nuevo2:String=String::new();
+                                    io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                                    io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
+                                    let autor_nuebo2=nuevo2.trim().to_string();
+                                    libro.autor=autor_nuebo2;
+                                }
+                            }
+                            println!();
+                            println!("Cambios realizados.");
+                                
+                    }
+                    else{
+                        println!("La revista no fue encontrada...");
+                    }
                 }
             },
             5=>{
