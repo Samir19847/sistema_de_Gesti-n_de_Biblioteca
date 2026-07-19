@@ -471,12 +471,12 @@ loop{
                                     let titulo_nuebo2=nuevo2.trim().to_string();
                                     revistas.titulo=titulo_nuebo2;
                                     println!();
-                                    print!("Por favor, ingrese la edición de la revista: {}", nuevo1);
-                                    let mut nuevo2:String=String::new();
+                                    print!("Por favor, ingrese la edición de la revista {}: ", nuevo2);
+                                    let mut nuevo3:String=String::new();
                                     io::stdout().flush().expect("Error en el forzamiento del bufer.");
-                                    io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
-                                    let edicion_nuebo2=nuevo2.trim().to_string();
-                                    revistas.edicion=autor_nuebo2;
+                                    io::stdin().read_line(&mut nuevo3).expect("Error en la lectura de la línea");
+                                    let edicion_nuebo2=nuevo3.trim().to_string();
+                                    revistas.edicion=edicion_nuebo2;
                                 }
                             }
                             println!();
