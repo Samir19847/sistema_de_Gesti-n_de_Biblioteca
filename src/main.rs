@@ -195,6 +195,8 @@ loop{
         println!("|       5. Eliminar Documentos        |");
         println!("|         6. Ver Estanterías          |");
         println!("|    7. Salir del tipo de documento   |");
+        println!("|       8. Prestar Documento          |");
+        println!("|       9. Devolver Documento         |");
         println!("|                                     |");
         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
         println!();
@@ -538,13 +540,56 @@ loop{
                 println!("Saliendo del tipo de documento...");
                 println!(); break;
             }
+            8 => {
+                if documento == 1 {
+                    if coleccion_libros.len()>0{
+                        print!("Ingrese el título del libro a prestar: ");
+                        let mut buscado: String = String::new();
+                        io::stdout().flush().expect("Error en el forzamiento del bufer.");
+                        io::stdin().read_line(&mut buscado).expect("Error en la lectura de la línea");
+                        let titulo_buscado = buscado.trim();
+                        println!();
+                    if let Some(indice) = coleccion_libros.iter().position(|l| l.titulo == titulo_buscado) {
+                        if let Some(libro) = coleccion_libros.get_mut(indice) {
+                            if libro.prestar() {
+                                println!("Libro prestado con éxito.");
+                            } else {
+                                println!("El libro ya estaba prestado.");
+                            }
+                        }
+                    } else {
+                        println!("Libro no encontrado.");
+                    }
+                }
+                    
+
+            }
+            if documento==2{
+                print!("Ingrese el título del a revista a prestar: ");
+                let mut buscado1:String=String::new();
+                io::stdout().flush().expect("Error en el forzamiento del bufer");
+                io::stdin().read_line(&mut buscado1).expect("Error en la lectura de la línea");
+                let titulo_buscado1=buscado1.trim();
+                if let Some(indice)=coleccion_revistas.iter().position(|r| r.titulo==titulo_buscado1){
+                    if let Some(revista)=coleccion_revistas.get_mut(indice){
+                        if revista.prestar() {
+                            println!("Revista prestada con éxito.");
+                        }
+                        else {
+                            println!("La revista ya estaba prestada.")
+                        }
+                    }
+                }
+                else{
+                    println!("Revista no encontrada");
+                }
+            }
+        },
             _=>{
                 println!("Opción inválida, por favor ingrese una opción que este en el menú\nPor favor, vuelve a intentarlo: ");
             }
 
-        }
-
-
     }
 }    
+}
 }
