@@ -255,7 +255,7 @@ loop{
                     println!();
                     contador+=1;
 
-                    let obj_revistas=Revistas::constructor(titulo, edicion);
+                    let obj_revistas=Revistas::constructor(titulazo, edicionazo);
                     
                     coleccion_revistas.push(obj_revistas.clone());
                     estanteria.agregar_coleccion(Box::new(obj_revistas));
@@ -356,8 +356,8 @@ loop{
                         println!("|                            |");
                         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
                         println!();
+                        let mut contador=1;
                         for item in &coleccion_libros{
-                            let mut contador=1;
                             let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
                             println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.autor, estado);
                             println!();
@@ -385,8 +385,8 @@ loop{
                         println!("|                            |");
                         println!("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
                         println!();
+                        let mut contador=1;
                         for item in &coleccion_revistas{
-                            let mut contador=1;
                             let estado= if item.esta_disponible() {" Disponible "} else {" No Disponible "};
                             println!("{}. Título: {}, Autor: {}, Estado: {}.", contador, item.titulo, item.edicion, estado);
                             println!();
@@ -443,20 +443,20 @@ loop{
                     if coleccion_revistas.iter().any(|libros| libros.titulo==modificado2) {
                             println!("!La revista {} fue entonctrado!", modificado2);
                             if let Some(indice)=coleccion_revistas.iter().position(|libros| libros.titulo==modificado2) {
-                                if let Some(libro)=coleccion_revistas.get_mut(indice){
+                                if let Some(revistas)=coleccion_revistas.get_mut(indice){
                                     print!("Por favor, ingrese el nuevo título del libro: {}", modificado2);
                                     let mut nuevo2:String=String::new();
                                     io::stdout().flush().expect("Error en el forzamiento del bufer.");
                                     io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
                                     let titulo_nuebo2=nuevo2.trim().to_string();
-                                    libro.titulo=titulo_nuebo2;
+                                    revistas.titulo=titulo_nuebo2;
                                     println!();
                                     print!("Por favor, ingrese la edición de la revista: {}", nuevo1);
                                     let mut nuevo2:String=String::new();
                                     io::stdout().flush().expect("Error en el forzamiento del bufer.");
                                     io::stdin().read_line(&mut nuevo2).expect("Error en la lectura de la línea");
-                                    let autor_nuebo2=nuevo2.trim().to_string();
-                                    libro.autor=autor_nuebo2;
+                                    let edicion_nuebo2=nuevo2.trim().to_string();
+                                    revistas.edicion=autor_nuebo2;
                                 }
                             }
                             println!();
@@ -504,7 +504,7 @@ loop{
                         let mut eliminado2:String=String::new();
                         io::stdout().flush().expect("Error en el forzamiento del bufer.");
                         io::stdin().read_line(&mut eliminado2).expect("Error en la lectura de la línea.");
-                        let titulo_eliminado2=eliminado2;
+                        let titulo_eliminado2=eliminado2.trim();
                         println!();
                         if let Some(indice)=coleccion_revistas.iter().position(|revistas|revistas.titulo==titulo_eliminado2){
                             coleccion_revistas.remove(indice);
